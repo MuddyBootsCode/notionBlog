@@ -1,24 +1,29 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from 'react';
+import "react-notion/src/styles.css";
+import { NotionRenderer } from "react-notion";
+import { pageChunk } from './chunk';
 
 function App() {
+  // const [data, setData] = useState(null);
+  //
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try{
+  //       const result = await fetch('https://notion-api.splitbee.io/v1/page/b2a847477c554189b48ad2ab26d37fb7')
+  //       const blockMap = await result.json();
+  //       setData(blockMap)
+  //     } catch(error){
+  //       console.log(error)
+  //     }
+  //   }
+  //   fetchData();
+  // }, [])
+
+  const pageData = pageChunk.recordMap.block;
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <NotionRenderer blockMap={pageData} />
     </div>
   );
 }
